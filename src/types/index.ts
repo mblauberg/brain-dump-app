@@ -68,7 +68,10 @@ export interface BrainDumpEntry {
   isProcessed: boolean;
   extractedTasks: Task[];
   extractedHabits: Habit[];
+  extractedEvents: CalendarEvent[];
+  extractedSleepSchedules: SleepSchedule[];
   createdAt: Date;
+  processingError?: string;
 }
 
 export interface CalendarEvent {
@@ -85,15 +88,30 @@ export type AIProvider = 'openai' | 'claude' | 'gemini' | 'none';
 
 export interface AIModelConfig {
   openai: {
-    models: string[];
+    models: {
+      id: string;
+      name: string;
+      description: string;
+      maxTokens: number;
+    }[];
     defaultModel: string;
   };
   claude: {
-    models: string[];
+    models: {
+      id: string;
+      name: string;
+      description: string;
+      maxTokens: number;
+    }[];
     defaultModel: string;
   };
   gemini: {
-    models: string[];
+    models: {
+      id: string;
+      name: string;
+      description: string;
+      maxTokens: number;
+    }[];
     defaultModel: string;
   };
 }
@@ -105,6 +123,13 @@ export interface AISettings {
   temperature: number;
   maxTokens: number;
   enableCache: boolean;
+  customInstructions?: string;
+  extractionTypes: {
+    tasks: boolean;
+    habits: boolean;
+    events: boolean;
+    sleep: boolean;
+  };
 }
 
 export interface UserPreferences {

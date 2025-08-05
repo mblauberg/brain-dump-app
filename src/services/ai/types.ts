@@ -1,4 +1,4 @@
-import { Task, Habit } from '../../types';
+import { Task, Habit, CalendarEvent, SleepSchedule } from '../../types';
 
 export interface AIProvider {
   name: string;
@@ -16,19 +16,26 @@ export interface AIOptions {
 export interface AIResponse {
   tasks: Task[];
   habits: Habit[];
+  events: CalendarEvent[];
+  sleepSchedules: SleepSchedule[];
   rawResponse?: string;
   usage?: {
     promptTokens: number;
     completionTokens: number;
     totalTokens: number;
   };
+  processingTime?: number;
 }
 
 export interface ModelInfo {
   id: string;
   name: string;
-  description?: string;
-  maxTokens?: number;
+  description: string;
+  maxTokens: number;
+  costPer1kTokens?: {
+    input: number;
+    output: number;
+  };
 }
 
 export interface AIError extends Error {

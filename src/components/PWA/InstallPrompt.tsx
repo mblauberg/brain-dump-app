@@ -14,9 +14,13 @@ const InstallPrompt: React.FC = () => {
   useEffect(() => {
     // Check if app is already installed
     const checkIfInstalled = () => {
-      if (window.matchMedia('(display-mode: standalone)').matches) {
-        setIsInstalled(true);
-        return;
+      // Handle test environment where matchMedia might not be available
+      if (typeof window.matchMedia === 'function') {
+        const mediaQuery = window.matchMedia('(display-mode: standalone)');
+        if (mediaQuery && mediaQuery.matches) {
+          setIsInstalled(true);
+          return;
+        }
       }
       
       if (window.navigator && 'standalone' in window.navigator && (window.navigator as any).standalone) {

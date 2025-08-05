@@ -49,6 +49,73 @@
     border-width: 2px;
     border-color: currentColor;
   }
+
+  /* Glass Component High Contrast Overrides */
+  .glass-morphism,
+  .glass-morphism-light,
+  .glass-morphism-heavy {
+    background-color: white !important;
+    backdrop-filter: none !important;
+    border: 2px solid currentColor !important;
+    box-shadow: none !important;
+  }
+
+  [data-theme="dark"] .glass-morphism,
+  [data-theme="dark"] .glass-morphism-light,
+  [data-theme="dark"] .glass-morphism-heavy {
+    background-color: rgb(17, 24, 39) !important;
+    color: white !important;
+  }
+
+  /* Glass buttons in high contrast */
+  button[class*="glass-morphism"] {
+    background-color: ButtonFace !important;
+    color: ButtonText !important;
+    border: 2px solid ButtonText !important;
+    backdrop-filter: none !important;
+  }
+
+  button[class*="glass-morphism"]:hover {
+    background-color: Highlight !important;
+    color: HighlightText !important;
+  }
+
+  button[class*="glass-morphism"]:focus {
+    outline: 3px solid Highlight !important;
+    outline-offset: 2px !important;
+  }
+
+  /* Glass inputs in high contrast */
+  input[class*="glass-morphism"],
+  textarea[class*="glass-morphism"] {
+    background-color: Field !important;
+    color: FieldText !important;
+    border: 2px solid FieldText !important;
+    backdrop-filter: none !important;
+  }
+
+  input[class*="glass-morphism"]:focus,
+  textarea[class*="glass-morphism"]:focus {
+    background-color: Field !important;
+    border-color: Highlight !important;
+    outline: 2px solid Highlight !important;
+  }
+
+  /* Remove glass effects from containers */
+  [class*="bg-glass-"] {
+    background-color: Canvas !important;
+  }
+
+  [class*="backdrop-blur"] {
+    backdrop-filter: none !important;
+  }
+
+  /* Ensure sufficient contrast for glass borders */
+  .glass-border,
+  .glass-border-strong {
+    border-color: currentColor !important;
+    border-width: 2px !important;
+  }
 }
 
 /* Reduced Motion Support */
@@ -60,6 +127,63 @@
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
     scroll-behavior: auto !important;
+  }
+
+  /* Glass Component Reduced Motion Overrides */
+  .glass-morphism,
+  .glass-morphism-light,
+  .glass-morphism-heavy {
+    transition: none !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  /* Disable glass shimmer and energy effects */
+  .animate-glass-shimmer,
+  .animate-gentle-pulse,
+  .animate-energy-glow {
+    animation: none !important;
+  }
+
+  /* Disable scale and transform effects on glass buttons */
+  button[class*="glass-"],
+  [class*="hover:scale-"],
+  [class*="hover:brightness-"],
+  [class*="active:scale-"] {
+    transform: none !important;
+    filter: none !important;
+  }
+
+  button[class*="glass-"]:hover,
+  button[class*="glass-"]:focus,
+  button[class*="glass-"]:active {
+    transform: none !important;
+    filter: none !important;
+    animation: none !important;
+  }
+
+  /* Disable glass input scaling */
+  input[class*="focus:scale-"],
+  textarea[class*="focus:scale-"] {
+    transform: none !important;
+  }
+
+  input:focus,
+  textarea:focus {
+    transform: none !important;
+  }
+
+  /* Disable progressive disclosure animations */
+  [class*="max-h-0"],
+  [class*="max-h-96"] {
+    transition: none !important;
+    max-height: none !important;
+  }
+
+  /* Static opacity for reduced motion */
+  [class*="opacity-0"],
+  [class*="opacity-100"] {
+    transition: none !important;
   }
 }
 
@@ -206,6 +330,84 @@ textarea:disabled {
   transition-duration: 0.1s;
 }
 
+/* ADHD-Specific Glass Component Enhancements */
+.adhd-focus-mode .glass-morphism,
+.adhd-focus-mode .glass-morphism-light,
+.adhd-focus-mode .glass-morphism-heavy {
+  /* Simplify glass effects in focus mode */
+  backdrop-filter: blur(4px) !important;
+  background-color: rgba(255, 255, 255, 0.95) !important;
+  border: 1px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Energy-Adaptive Glass Accessibility */
+[data-energy-level="low"] .glass-morphism,
+[data-energy-level="low"] .glass-morphism-light,
+[data-energy-level="low"] .glass-morphism-heavy {
+  /* Softer glass effects for low energy */
+  backdrop-filter: blur(6px);
+  background-color: rgba(255, 255, 255, 0.9);
+  transition-duration: 0.4s;
+}
+
+[data-energy-level="high"] .glass-morphism,
+[data-energy-level="high"] .glass-morphism-light,
+[data-energy-level="high"] .glass-morphism-heavy {
+  /* More vibrant glass effects for high energy */
+  backdrop-filter: blur(12px) saturate(120%);
+  transition-duration: 0.15s;
+}
+
+/* Cognitive Load Glass Adaptations */
+[data-cognitive-load="minimal"] .glass-morphism,
+[data-cognitive-load="minimal"] .glass-morphism-light,
+[data-cognitive-load="minimal"] .glass-morphism-heavy {
+  /* Simplified glass for minimal cognitive load */
+  backdrop-filter: blur(4px);
+  background-color: rgba(255, 255, 255, 0.9);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+[data-cognitive-load="detailed"] .glass-morphism,
+[data-cognitive-load="detailed"] .glass-morphism-light,
+[data-cognitive-load="detailed"] .glass-morphism-heavy {
+  /* Enhanced glass for detailed view */
+  backdrop-filter: blur(16px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+}
+
+/* Glass Focus Enhancements for ADHD */
+.glass-morphism:focus-within,
+.glass-morphism-light:focus-within,
+.glass-morphism-heavy:focus-within {
+  /* Enhanced focus indicators for glass components */
+  outline: 3px solid rgb(59 130 246);
+  outline-offset: 2px;
+  backdrop-filter: blur(8px) brightness(105%);
+  transform: scale(1.01);
+  transition: all 0.2s ease-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .glass-morphism:focus-within,
+  .glass-morphism-light:focus-within,
+  .glass-morphism-heavy:focus-within {
+    transform: none;
+    transition: none;
+  }
+}
+
+/* Glass Container Keyboard Navigation */
+[data-variant]:focus {
+  /* Improved keyboard focus for glass containers */
+  outline: 3px solid rgb(59 130 246);
+  outline-offset: 2px;
+  box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+}
+
 /* Error Prevention */
 .destructive-action {
   background-color: rgb(239 68 68);
@@ -219,4 +421,24 @@ textarea:disabled {
 .destructive-action:focus {
   outline-color: rgb(239 68 68);
   outline-width: 3px;
+}
+
+/* Glass Error States */
+.glass-morphism.error,
+.glass-morphism-light.error,
+.glass-morphism-heavy.error {
+  backdrop-filter: blur(8px);
+  background-color: rgba(254, 242, 242, 0.9);
+  border: 2px solid rgb(239, 68, 68);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.2);
+}
+
+/* Glass Success States */
+.glass-morphism.success,
+.glass-morphism-light.success,
+.glass-morphism-heavy.success {
+  backdrop-filter: blur(8px);
+  background-color: rgba(240, 253, 244, 0.9);
+  border: 2px solid rgb(34, 197, 94);
+  box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
 }

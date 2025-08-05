@@ -18,12 +18,16 @@ export class AIService {
 
   async processText(
     text: string,
-    settings: AISettings
+    settings: AISettings,
+    extractionTypes?: { tasks: boolean; habits: boolean; events: boolean; sleep: boolean }
   ): Promise<AIResponse> {
     // Check if AI is enabled
     if (settings.provider === 'none' || !settings.apiKey) {
       throw new Error('AI processing is not configured. Please configure an AI provider in settings.');
     }
+
+    // Use extraction types from settings if not provided
+    // Note: extractionTypes parameter available for future use
 
     // Get the provider
     const provider = this.providers.get(settings.provider);

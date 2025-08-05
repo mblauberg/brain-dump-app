@@ -8,6 +8,7 @@ import {
 import { useAppStore } from '../../stores/useAppStore';
 import { getAIService } from '../../services/ai';
 import { AIProvider } from '../../types';
+import { AI_MODEL_CONFIGS } from '../../services/ai/prompts';
 
 const AISettings: React.FC = () => {
   const { userPreferences, updateUserPreferences } = useAppStore();
@@ -20,22 +21,12 @@ const AISettings: React.FC = () => {
   
   const aiService = getAIService();
 
-  // Available models for each provider
+  // Get latest model configurations
+  const modelConfigs = AI_MODEL_CONFIGS;
   const modelOptions = {
-    openai: [
-      { id: 'gpt-4-turbo-preview', name: 'GPT-4 Turbo (Recommended)', description: 'Most capable, 128k context' },
-      { id: 'gpt-4', name: 'GPT-4', description: 'High quality, slower' },
-      { id: 'gpt-3.5-turbo', name: 'GPT-3.5 Turbo', description: 'Fast and cost-effective' },
-    ],
-    claude: [
-      { id: 'claude-3-opus-20240229', name: 'Claude 3 Opus (Recommended)', description: 'Most capable' },
-      { id: 'claude-3-sonnet-20240229', name: 'Claude 3 Sonnet', description: 'Balanced performance' },
-      { id: 'claude-3-haiku-20240307', name: 'Claude 3 Haiku', description: 'Fast and efficient' },
-    ],
-    gemini: [
-      { id: 'gemini-pro', name: 'Gemini Pro (Recommended)', description: 'Best for text tasks' },
-      { id: 'gemini-pro-vision', name: 'Gemini Pro Vision', description: 'Multimodal capabilities' },
-    ],
+    openai: modelConfigs.openai.models,
+    claude: modelConfigs.claude.models,
+    gemini: modelConfigs.gemini.models,
     none: []
   };
 
@@ -57,9 +48,9 @@ const AISettings: React.FC = () => {
 
   const handleProviderChange = (provider: AIProvider) => {
     const defaultModels = {
-      openai: 'gpt-4-turbo-preview',
-      claude: 'claude-3-opus-20240229',
-      gemini: 'gemini-pro',
+      openai: modelConfigs.openai.defaultModel,
+      claude: modelConfigs.claude.defaultModel,
+      gemini: modelConfigs.gemini.defaultModel,
       none: ''
     };
     
@@ -87,18 +78,19 @@ const AISettings: React.FC = () => {
     setTestResult(null);
 
     try {
-      const testText = "I need to finish my project report by Friday, exercise more regularly, and remember to call my dentist for an appointment.";
+      const testText = "I need to finish my project report by Friday, exercise more regularly, remember to call my dentist for an appointment next week, and I want to start going to bed by 10 PM.";
       const response = await aiService.processText(testText, localSettings);
       
-      if (response.tasks.length > 0 || response.habits.length > 0) {
+      const totalItems = response.tasks.length + response.habits.length + response.events.length + response.sleepSchedules.length;
+      if (totalItems > 0) {
         setTestResult({ 
           success: true, 
-          message: `AI working! Found ${response.tasks.length} tasks and ${response.habits.length} habits.` 
+          message: `AI working! Found ${response.tasks.length} tasks, ${response.habits.length} habits, ${response.events.length} events, and ${response.sleepSchedules.length} sleep items.` 
         });
       } else {
         setTestResult({ 
           success: false, 
-          message: 'AI responded but no tasks or habits were extracted.' 
+          message: 'AI responded but no items were extracted.' 
         });
       }
     } catch (error) {
@@ -201,7 +193,8 @@ const AISettings: React.FC = () => {
               >
                 {modelOptions[localSettings.provider as keyof typeof modelOptions].map((model) => (
                   <option key={model.id} value={model.id}>
-                    {model.name} - {model.description}
+                    {model.name} - {model.description} 
+                    {model.costPer1kTokens && ` ($${model.costPer1kTokens.input}/$${model.costPer1kTokens.output} per 1k tokens)`}
                   </option>
                 ))}
               </select>
@@ -249,7 +242,7 @@ const AISettings: React.FC = () => {
                 </p>
               </div>
 
-              <div className="flex items-center">
+              <div className="flex items-center mb-4">
                 <input
                   type="checkbox"
                   id="enableCache"
@@ -260,6 +253,47 @@ const AISettings: React.FC = () => {
                 <label htmlFor="enableCache" className="ml-2 block text-sm text-gray-900">
                   Enable response caching (reduces API calls)
                 </label>
+              </div>
+
+              {/* Extraction Types */}
+              <div>
+                <h5 className="text-sm font-medium text-gray-900 mb-3">What should AI extract from brain dumps?</h5>
+                <div className="grid grid-cols-2 gap-3">
+                  {[
+                    { key: 'tasks', label: 'Tasks', icon: '✓', description: 'Action items and to-dos' },
+                    { key: 'habits', label: 'Habits', icon: '🔄', description: 'Recurring behaviors' },
+                    { key: 'events', label: 'Events', icon: '📅', description: 'Appointments and meetings' },
+                    { key: 'sleep', label: 'Sleep', icon: '😴', description: 'Sleep goals and schedules' },
+                  ].map(({ key, label, icon, description }) => (
+                    <div key={key} className="flex items-start space-x-3 p-3 border border-gray-200 rounded-lg hover:bg-gray-50">
+                      <input
+                        type="checkbox"
+                        id={`extract-${key}`}
+                        checked={localSettings.extractionTypes[key as keyof typeof localSettings.extractionTypes]}
+                        onChange={(e) => setLocalSettings(prev => ({
+                          ...prev,
+                          extractionTypes: {
+                            ...prev.extractionTypes,
+                            [key]: e.target.checked
+                          }
+                        }))}
+                        className="mt-1 h-4 w-4 text-primary-600 focus:ring-primary-500 border-gray-300 rounded"
+                      />
+                      <div className="flex-1">
+                        <label htmlFor={`extract-${key}`} className="flex items-center space-x-2 cursor-pointer">
+                          <span className="text-lg">{icon}</span>
+                          <div>
+                            <div className="text-sm font-medium text-gray-900">{label}</div>
+                            <div className="text-xs text-gray-500">{description}</div>
+                          </div>
+                        </label>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+                <p className="text-xs text-gray-500 mt-2">
+                  Select which types of items the AI should identify and extract from your brain dumps.
+                </p>
               </div>
             </div>
           </>

@@ -7,7 +7,7 @@ import {
   validateAIResponse,
   preprocessBrainDump
 } from '../prompts';
-import { Task, Habit } from '../../../types';
+import { Task, Habit, CalendarEvent, SleepSchedule } from '../../../types';
 
 const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -16,22 +16,25 @@ export class ClaudeProvider implements AIProvider {
   
   private models: ModelInfo[] = [
     { 
-      id: 'claude-3-opus-20240229', 
-      name: 'Claude 3 Opus', 
-      description: 'Most capable model for complex tasks',
-      maxTokens: 4096
+      id: 'claude-opus-4', 
+      name: 'Claude Opus 4', 
+      description: 'Most powerful model for complex coding and AI agents with hybrid reasoning',
+      maxTokens: 500000,
+      costPer1kTokens: { input: 0.025, output: 0.125 }
     },
     { 
-      id: 'claude-3-sonnet-20240229', 
-      name: 'Claude 3 Sonnet', 
-      description: 'Balanced performance and cost',
-      maxTokens: 4096
+      id: 'claude-sonnet-4', 
+      name: 'Claude Sonnet 4', 
+      description: 'High-performance workhorse balancing quality, cost, and speed',
+      maxTokens: 200000,
+      costPer1kTokens: { input: 0.003, output: 0.015 }
     },
     { 
-      id: 'claude-3-haiku-20240307', 
-      name: 'Claude 3 Haiku', 
-      description: 'Fast and cost-effective',
-      maxTokens: 4096
+      id: 'claude-3-5-sonnet-20241022', 
+      name: 'Claude 3.5 Sonnet (Legacy)', 
+      description: 'Previous generation, still excellent for most tasks',
+      maxTokens: 200000,
+      costPer1kTokens: { input: 0.003, output: 0.015 }
     },
   ];
 
@@ -71,7 +74,12 @@ export class ClaudeProvider implements AIProvider {
         messages: [
           {
             role: 'user',
-            content: createUserPrompt(processedText) + '\n\nPlease respond with valid JSON only.'
+            content: createUserPrompt(processedText, {
+              tasks: true,
+              habits: true,
+              events: true,
+              sleep: true
+            }) + '\n\nPlease respond with valid JSON only.'
           }
         ]
       });
@@ -121,9 +129,28 @@ export class ClaudeProvider implements AIProvider {
         createdAt: new Date(),
       }));
 
+      const events: CalendarEvent[] = parsedResponse.events.map((event: any) => ({
+        id: generateId(),
+        title: event.title,
+        startTime: new Date(event.startTime),
+        endTime: new Date(event.endTime),
+        type: event.type || 'appointment',
+        isFixed: event.isFixed !== false,
+      }));
+
+      const sleepSchedules: SleepSchedule[] = parsedResponse.sleepSchedules.map((schedule: any) => ({
+        id: generateId(),
+        bedtime: schedule.bedtime,
+        wakeTime: schedule.wakeTime,
+        date: schedule.date ? new Date(schedule.date) : new Date(),
+        sleepQuality: undefined,
+      }));
+
       return {
         tasks,
         habits,
+        events,
+        sleepSchedules,
         rawResponse: responseText,
         usage: message.usage ? {
           promptTokens: message.usage.input_tokens,

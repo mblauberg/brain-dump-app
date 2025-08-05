@@ -9,7 +9,8 @@ import {
   UserPreferences,
   TaskStatus,
   BedtimeRoutineItem,
-  BedtimeRoutineCompletion
+  BedtimeRoutineCompletion,
+  AISettings
 } from '../types';
 
 interface AppState {
@@ -43,8 +44,9 @@ interface AppState {
 
   // Brain Dump
   brainDumpEntries: BrainDumpEntry[];
-  addBrainDumpEntry: (entry: Omit<BrainDumpEntry, 'id' | 'createdAt' | 'isProcessed' | 'extractedTasks' | 'extractedHabits'>) => void;
-  processBrainDumpEntry: (id: string, extractedTasks: Task[], extractedHabits: Habit[]) => void;
+  addBrainDumpEntry: (entry: Omit<BrainDumpEntry, 'id' | 'createdAt' | 'isProcessed' | 'extractedTasks' | 'extractedHabits' | 'extractedEvents' | 'extractedSleepSchedules'>) => void;
+  processBrainDumpEntry: (id: string, extractedTasks: Task[], extractedHabits: Habit[], extractedEvents: CalendarEvent[], extractedSleepSchedules: SleepSchedule[]) => void;
+  setBrainDumpProcessingError: (id: string, error: string) => void;
 
   // Calendar
   calendarEvents: CalendarEvent[];
@@ -67,6 +69,21 @@ interface AppState {
 
 const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
+const defaultAISettings: AISettings = {
+  provider: (process.env.REACT_APP_DEFAULT_AI_PROVIDER as any) || 'none',
+  apiKey: process.env.REACT_APP_OPENAI_API_KEY || process.env.REACT_APP_CLAUDE_API_KEY || process.env.REACT_APP_GEMINI_API_KEY || undefined,
+  model: (process.env.REACT_APP_DEFAULT_AI_MODEL as string) || 'gpt-4o-mini',
+  temperature: 0.7,
+  maxTokens: 2000,
+  enableCache: true,
+  extractionTypes: {
+    tasks: true,
+    habits: true,
+    events: true,
+    sleep: true,
+  },
+};
+
 const defaultUserPreferences: UserPreferences = {
   energyPeakHours: [9, 10, 11],
   workingHours: { start: '09:00', end: '17:00' },
@@ -77,14 +94,7 @@ const defaultUserPreferences: UserPreferences = {
     sleep: true,
   },
   theme: 'light',
-  aiSettings: {
-    provider: (process.env.REACT_APP_DEFAULT_AI_PROVIDER as any) || 'none',
-    apiKey: undefined,
-    model: 'gpt-4-turbo-preview',
-    temperature: 0.7,
-    maxTokens: 2000,
-    enableCache: true,
-  },
+  aiSettings: defaultAISettings,
 };
 
 export const useAppStore = create<AppState>()(
@@ -294,6 +304,8 @@ export const useAppStore = create<AppState>()(
             isProcessed: false,
             extractedTasks: [],
             extractedHabits: [],
+            extractedEvents: [],
+            extractedSleepSchedules: [],
           };
           set(
             (state) => ({ brainDumpEntries: [...state.brainDumpEntries, entry] }),
@@ -301,7 +313,7 @@ export const useAppStore = create<AppState>()(
             'addBrainDumpEntry'
           );
         },
-        processBrainDumpEntry: (id, extractedTasks, extractedHabits) => {
+        processBrainDumpEntry: (id, extractedTasks, extractedHabits, extractedEvents, extractedSleepSchedules) => {
           set(
             (state) => ({
               brainDumpEntries: state.brainDumpEntries.map((entry) =>
@@ -312,14 +324,36 @@ export const useAppStore = create<AppState>()(
                       processedAt: new Date(),
                       extractedTasks,
                       extractedHabits,
+                      extractedEvents,
+                      extractedSleepSchedules,
+                      processingError: undefined,
                     }
                   : entry
               ),
               tasks: [...state.tasks, ...extractedTasks],
               habits: [...state.habits, ...extractedHabits],
+              calendarEvents: [...state.calendarEvents, ...extractedEvents],
+              sleepSchedules: [...state.sleepSchedules, ...extractedSleepSchedules],
             }),
             false,
             'processBrainDumpEntry'
+          );
+        },
+        setBrainDumpProcessingError: (id, error) => {
+          set(
+            (state) => ({
+              brainDumpEntries: state.brainDumpEntries.map((entry) =>
+                entry.id === id
+                  ? {
+                      ...entry,
+                      processingError: error,
+                      isProcessed: false,
+                    }
+                  : entry
+              ),
+            }),
+            false,
+            'setBrainDumpProcessingError'
           );
         },
 

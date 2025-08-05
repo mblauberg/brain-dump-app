@@ -7,7 +7,7 @@ import {
   validateAIResponse,
   preprocessBrainDump
 } from '../prompts';
-import { Task, Habit } from '../../../types';
+import { Task, Habit, CalendarEvent, SleepSchedule } from '../../../types';
 
 const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -16,22 +16,32 @@ export class OpenAIProvider implements AIProvider {
   
   private models: ModelInfo[] = [
     { 
-      id: 'gpt-4-turbo-preview', 
-      name: 'GPT-4 Turbo', 
-      description: 'Most capable model with 128k context',
-      maxTokens: 4096
+      id: 'gpt-4o', 
+      name: 'GPT-4o', 
+      description: 'Most capable GPT-4 model, optimized for chat',
+      maxTokens: 128000,
+      costPer1kTokens: { input: 0.0025, output: 0.01 }
+    },
+    { 
+      id: 'gpt-4o-mini', 
+      name: 'GPT-4o Mini', 
+      description: 'Affordable and fast model for simple tasks',
+      maxTokens: 128000,
+      costPer1kTokens: { input: 0.000075, output: 0.0003 }
     },
     { 
       id: 'gpt-4', 
       name: 'GPT-4', 
-      description: 'High quality, slower and more expensive',
-      maxTokens: 8192
+      description: 'High-intelligence flagship model for complex, multi-step tasks',
+      maxTokens: 8192,
+      costPer1kTokens: { input: 0.03, output: 0.06 }
     },
     { 
       id: 'gpt-3.5-turbo', 
       name: 'GPT-3.5 Turbo', 
-      description: 'Fast and cost-effective',
-      maxTokens: 4096
+      description: 'Fast, inexpensive model for simple tasks',
+      maxTokens: 16385,
+      costPer1kTokens: { input: 0.0005, output: 0.0015 }
     },
   ];
 
@@ -66,7 +76,12 @@ export class OpenAIProvider implements AIProvider {
         model: model,
         messages: [
           { role: 'system', content: systemPrompt },
-          { role: 'user', content: createUserPrompt(processedText) }
+          { role: 'user', content: createUserPrompt(processedText, {
+            tasks: true,
+            habits: true,
+            events: true,
+            sleep: true
+          }) }
         ],
         temperature: options.temperature || 0.7,
         max_tokens: options.maxTokens || 2000,
@@ -106,9 +121,28 @@ export class OpenAIProvider implements AIProvider {
         createdAt: new Date(),
       }));
 
+      const events: CalendarEvent[] = parsedResponse.events.map((event: any) => ({
+        id: generateId(),
+        title: event.title,
+        startTime: new Date(event.startTime),
+        endTime: new Date(event.endTime),
+        type: event.type || 'appointment',
+        isFixed: event.isFixed !== false,
+      }));
+
+      const sleepSchedules: SleepSchedule[] = parsedResponse.sleepSchedules.map((schedule: any) => ({
+        id: generateId(),
+        bedtime: schedule.bedtime,
+        wakeTime: schedule.wakeTime,
+        date: schedule.date ? new Date(schedule.date) : new Date(),
+        sleepQuality: undefined,
+      }));
+
       return {
         tasks,
         habits,
+        events,
+        sleepSchedules,
         rawResponse: responseText,
         usage: completion.usage ? {
           promptTokens: completion.usage.prompt_tokens,

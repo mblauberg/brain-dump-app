@@ -7,7 +7,7 @@ import {
   validateAIResponse,
   preprocessBrainDump
 } from '../prompts';
-import { Task, Habit } from '../../../types';
+import { Task, Habit, CalendarEvent, SleepSchedule } from '../../../types';
 
 const generateId = () => `${Date.now()}-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -16,16 +16,39 @@ export class GeminiProvider implements AIProvider {
   
   private models: ModelInfo[] = [
     { 
-      id: 'gemini-pro', 
-      name: 'Gemini Pro', 
-      description: 'Best for text-based tasks',
-      maxTokens: 32768
+      id: 'gemini-2.5-pro', 
+      name: 'Gemini 2.5 Pro', 
+      description: 'Most intelligent model with thinking capabilities, 1M+ token context',
+      maxTokens: 1000000,
+      costPer1kTokens: { input: 0.002, output: 0.008 }
     },
     { 
-      id: 'gemini-pro-vision', 
-      name: 'Gemini Pro Vision', 
-      description: 'Multimodal model for text and images',
-      maxTokens: 32768
+      id: 'gemini-2.5-flash', 
+      name: 'Gemini 2.5 Flash', 
+      description: 'Cost-efficient with adaptive thinking, #2 on LMarena leaderboard',
+      maxTokens: 1000000,
+      costPer1kTokens: { input: 0.0001, output: 0.0004 }
+    },
+    { 
+      id: 'gemini-2.5-pro-deep-think', 
+      name: 'Gemini 2.5 Pro Deep Think', 
+      description: 'Experimental enhanced reasoning mode for highly complex problems',
+      maxTokens: 1000000,
+      costPer1kTokens: { input: 0.005, output: 0.02 }
+    },
+    { 
+      id: 'gemini-2.0-flash', 
+      name: 'Gemini 2.0 Flash', 
+      description: 'Production-ready workhorse model for developers',
+      maxTokens: 1000000,
+      costPer1kTokens: { input: 0.000075, output: 0.0003 }
+    },
+    { 
+      id: 'gemini-2.0-pro', 
+      name: 'Gemini 2.0 Pro', 
+      description: 'Experimental with strongest coding performance, 2M token context',
+      maxTokens: 2000000,
+      costPer1kTokens: { input: 0.00125, output: 0.005 }
     },
   ];
 
@@ -52,7 +75,12 @@ export class GeminiProvider implements AIProvider {
 
     try {
       const processedText = preprocessBrainDump(text);
-      const fullPrompt = `${ADHD_BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.gemini.additionalInstructions}\n\n${createUserPrompt(processedText)}\n\nIMPORTANT: Respond with valid JSON only, no additional text or markdown.`;
+      const fullPrompt = `${ADHD_BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.gemini.additionalInstructions}\n\n${createUserPrompt(processedText, {
+        tasks: true,
+        habits: true,
+        events: true,
+        sleep: true
+      })}\n\nIMPORTANT: Respond with valid JSON only, no additional text or markdown.`;
       
       // Configure generation parameters
       const generationConfig = {
@@ -109,12 +137,35 @@ export class GeminiProvider implements AIProvider {
         createdAt: new Date(),
       }));
 
+      const events: CalendarEvent[] = parsedResponse.events.map((event: any) => ({
+        id: generateId(),
+        title: event.title,
+        startTime: new Date(event.startTime),
+        endTime: new Date(event.endTime),
+        type: event.type || 'appointment',
+        isFixed: event.isFixed !== false,
+      }));
+
+      const sleepSchedules: SleepSchedule[] = parsedResponse.sleepSchedules.map((schedule: any) => ({
+        id: generateId(),
+        bedtime: schedule.bedtime,
+        wakeTime: schedule.wakeTime,
+        date: schedule.date ? new Date(schedule.date) : new Date(),
+        sleepQuality: undefined,
+      }));
+
       return {
         tasks,
         habits,
+        events,
+        sleepSchedules,
         rawResponse: cleanedResponse,
-        // Gemini doesn't provide token usage in the same way
-        usage: undefined
+        // Gemini provides usage information in newer versions
+        usage: response.usageMetadata ? {
+          promptTokens: response.usageMetadata.promptTokenCount || 0,
+          completionTokens: response.usageMetadata.candidatesTokenCount || 0,
+          totalTokens: response.usageMetadata.totalTokenCount || 0,
+        } : undefined
       };
     } catch (error: any) {
       if (error.message?.includes('API_KEY_INVALID')) {
