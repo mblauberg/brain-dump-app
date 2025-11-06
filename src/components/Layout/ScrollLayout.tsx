@@ -1,9 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import FloatingHeader from './FloatingHeader';
 import ScrollSection from './ScrollSection';
+import ContextualActionPanel from './ContextualActionPanel';
+import FloatingActionButtons from './FloatingActionButtons';
 import BrainDumpFixed from '../BrainDump/BrainDumpFixed';
-import TasksSection from '../Sections/TasksSection';
-import HabitsSection from '../Sections/HabitsSection';
+import { TasksSection, HabitsSection, SleepSection, CalendarSection } from '../Sections';
 import { GlassContainer } from '../Glass';
 import { useAppStore } from '../../stores/useAppStore';
 import { 
@@ -104,6 +105,20 @@ const ScrollLayout: React.FC<ScrollLayoutProps> = ({
         energyLevel={energyLevel}
       />
 
+      {/* Contextual Action Panel */}
+      <ContextualActionPanel
+        currentSection={currentSection}
+        energyLevel={energyLevel}
+        cognitiveLoad={cognitiveLoad}
+      />
+
+      {/* Floating Action Buttons */}
+      <FloatingActionButtons
+        currentSection={currentSection}
+        energyLevel={energyLevel}
+        cognitiveLoad={cognitiveLoad}
+      />
+
       {/* Main Content */}
       <main className="pt-28 pb-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto space-y-16">
@@ -166,7 +181,7 @@ const ScrollLayout: React.FC<ScrollLayoutProps> = ({
             />
           </ScrollSection>
 
-          {/* Sleep Section - Simplified */}
+          {/* Sleep Section */}
           <ScrollSection
             id="sleep"
             title="Sleep & Recovery"
@@ -177,61 +192,34 @@ const ScrollLayout: React.FC<ScrollLayoutProps> = ({
             energyLevel={energyLevel}
             lazyLoad={true}
           >
-            <GlassContainer
-              variant="light"
-              cognitiveLoad="minimal"
-              energyLevel={energyLevel}
-              className="text-center py-8"
-            >
-              <div className="space-y-4">
-                <div className="flex justify-center">
-                  <MoonIcon className="w-16 h-16 text-primary-500" />
-                </div>
-                <h4 className="text-xl font-semibold text-gray-900">Sleep Tracking Coming Soon</h4>
-                <p className="text-gray-600 max-w-md mx-auto">
-                  Track your sleep quality, bedtime routines, and recovery patterns to optimize your ADHD management.
-                </p>
-                <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
-                  <span>🌙 Bedtime Routines</span>
-                  <span>📊 Sleep Quality</span>
-                  <span>⏰ Smart Reminders</span>
-                </div>
-              </div>
-            </GlassContainer>
+            <SleepSection
+              collapsible={false}
+              initiallyExpanded={true}
+              cognitiveWeight="light"
+              adaptiveHeight={true}
+              minimalDisplay={cognitiveLoad === 'minimal'}
+            />
           </ScrollSection>
 
-          {/* Calendar Section - Simplified */}
+          {/* Calendar Section */}
           <ScrollSection
             id="calendar"
             title="Upcoming Events"
             icon={CalendarDaysIcon}
             collapsible={true}
             initiallyExpanded={cognitiveLoad === 'detailed'}
-            cognitiveWeight="light"
+            cognitiveWeight={cognitiveLoad === 'minimal' ? 'light' : 'medium'}
             energyLevel={energyLevel}
             lazyLoad={true}
           >
-            <GlassContainer
-              variant="light"
-              cognitiveLoad="minimal"
-              energyLevel={energyLevel}
-              className="text-center py-8"
-            >
-              <div className="space-y-4">
-                <div className="flex justify-center">
-                  <CalendarDaysIcon className="w-16 h-16 text-primary-500" />
-                </div>
-                <h4 className="text-xl font-semibold text-gray-900">Smart Calendar Integration</h4>
-                <p className="text-gray-600 max-w-md mx-auto">
-                  Sync with your existing calendars and get ADHD-optimized scheduling suggestions based on your energy levels.
-                </p>
-                <div className="flex items-center justify-center space-x-4 text-sm text-gray-500">
-                  <span>🔄 Calendar Sync</span>
-                  <span>⚡ Energy-Based Scheduling</span>
-                  <span>🧠 Smart Reminders</span>
-                </div>
-              </div>
-            </GlassContainer>
+            <CalendarSection
+              collapsible={false}
+              initiallyExpanded={true}
+              cognitiveWeight={cognitiveLoad === 'minimal' ? 'light' : 'medium'}
+              adaptiveHeight={true}
+              smartPreview={true}
+              maxEvents={cognitiveLoad === 'minimal' ? 3 : cognitiveLoad === 'standard' ? 5 : 8}
+            />
           </ScrollSection>
 
           {/* Quick Stats Footer */}
