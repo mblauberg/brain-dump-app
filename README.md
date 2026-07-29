@@ -1,4 +1,4 @@
-# Brain Organiser
+# Brain Dump
 
 A productivity app built for ADHD brains. Dump your thoughts in plain text, and let AI sort them into tasks, habits, and schedules.
 
