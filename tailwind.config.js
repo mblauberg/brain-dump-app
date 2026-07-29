@@ -17,7 +17,7 @@ module.exports = {
         '3xl': '40px'
       },
 
-      // ADHD-optimized spacing system
+      // Low-cognitive-load spacing system
       spacing: {
         '18': '4.5rem',  // 72px - optimal touch target
         '22': '5.5rem',  // 88px - comfortable spacing
@@ -88,7 +88,7 @@ module.exports = {
           900: '#7f1d1d',
         },
 
-        // Energy-based color system for ADHD optimization
+        // Energy-based colour system
         energy: {
           high: {
             50: '#fef7f0',
@@ -151,7 +151,7 @@ module.exports = {
         'focus-glow': '0 0 0 3px rgba(59, 130, 246, 0.5)',
       },
 
-      // ADHD-friendly animations
+      // Reduced-motion-friendly animations
       animation: {
         'glass-shimmer': 'glass-shimmer 3s ease-in-out infinite',
         'gentle-pulse': 'gentle-pulse 2s ease-in-out infinite',

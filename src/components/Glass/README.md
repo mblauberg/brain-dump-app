@@ -1,11 +1,11 @@
 # Glass Morphism Component Library
 
-A modern, ADHD-optimized component library featuring Apple's Liquid Glass design principles with comprehensive accessibility support.
+A modern, low-cognitive-load component library featuring Apple's Liquid Glass design principles with comprehensive accessibility support.
 
 ## 🎯 Features
 
 - **Glass Morphism Effects**: Translucent backgrounds with backdrop blur
-- **ADHD Optimization**: Energy-adaptive UI and cognitive load management
+- **Cognitive Load Management**: Energy-adaptive UI that adjusts density to the user's stated capacity
 - **Full Accessibility**: WCAG 2.1 AA compliant with high contrast and reduced motion support
 - **TypeScript Ready**: Complete type definitions and IntelliSense support
 - **Responsive Design**: Mobile-first approach with touch-friendly interactions
@@ -109,7 +109,7 @@ import { GlassInput } from './components/Glass';
 **Features:**
 - Floating label animation
 - Energy-based adaptive styling
-- Cognitive hints for ADHD users
+- Cognitive hints for users under high load
 - Comprehensive error handling
 - Glass morphism with fallbacks
 
@@ -167,7 +167,7 @@ Respects user motion preferences by disabling animations, transforms, and transi
 - Logical tab order and aria labels
 - Screen reader optimized content
 
-### ADHD-Specific Features
+### Cognitive-load features
 - **Focus Mode**: Simplified glass effects to reduce visual distraction
 - **Energy Adaptation**: Visual intensity matches user's current energy level  
 - **Cognitive Hints**: Contextual help text based on current state
@@ -221,7 +221,7 @@ Components use data attributes for styling and testing:
 - Color contrast verification (4.5:1 minimum)
 - High contrast mode testing
 
-### ADHD User Testing
+### Accessibility user testing
 - Cognitive load assessment
 - Energy level adaptation validation
 - Focus state management
@@ -287,7 +287,7 @@ See `GlassDemo.tsx` for comprehensive usage examples including:
 - Cognitive load adaptation
 - Progressive disclosure patterns
 - Accessibility feature demonstrations
-- Real-world ADHD optimization scenarios
+- Real-world high-cognitive-load scenarios
 
 ## 🤝 Contributing
 
@@ -304,5 +304,5 @@ When adding new glass components:
 
 - [Apple's Liquid Glass Design Documentation](https://developer.apple.com/videos/play/wwdc2025/219/)
 - [WCAG 2.1 AA Guidelines](https://www.w3.org/WAI/WCAG21/AA/)
-- [ADHD-Friendly Design Principles](https://www.w3.org/WAI/cognitive/)
+- [W3C Cognitive Accessibility Guidance](https://www.w3.org/WAI/cognitive/)
 - [CSS backdrop-filter MDN](https://developer.mozilla.org/en-US/docs/Web/CSS/backdrop-filter)

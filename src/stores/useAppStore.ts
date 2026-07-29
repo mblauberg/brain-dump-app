@@ -418,6 +418,10 @@ export const useAppStore = create<AppState>()(
         },
       }),
       {
+        // This is the localStorage key, not a display name. Renaming it to match
+        // the app's current name would orphan every existing user's data — the
+        // store would find nothing under the new key and silently start empty.
+        // It stays until someone writes a migration that reads the old key first.
         name: 'adhd-brain-organiser-storage',
         partialize: (state) => ({
           tasks: state.tasks,

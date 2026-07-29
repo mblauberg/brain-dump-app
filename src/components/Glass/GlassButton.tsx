@@ -42,7 +42,7 @@ const GlassButton: React.FC<GlassButtonProps> = ({
   // Size variants
   const sizeClasses = {
     sm: ['px-3 py-2 text-sm', 'min-h-[2.25rem]'], // 36px min height
-    md: ['px-4 py-2.5 text-sm', 'min-h-[2.75rem]'], // 44px min height - ADHD friendly
+    md: ['px-4 py-2.5 text-sm', 'min-h-[2.75rem]'], // 44px min height - accessible touch target
     lg: ['px-6 py-3 text-base', 'min-h-[3rem]'], // 48px min height
     xl: ['px-8 py-4 text-lg', 'min-h-[3.5rem]'], // 56px min height
   };

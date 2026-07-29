@@ -1,4 +1,4 @@
-# ADHD Brain Organiser - Development Tasks
+# Brain Dump Organiser - Development Tasks
 
 ## ✅ Completed High Priority Features
 
@@ -82,7 +82,7 @@
 - [ ] Add task sharing capabilities
 - [ ] Create family/team task coordination
 - [ ] Implement accountability partner features
-- [ ] Add ADHD coach integration
+- [ ] Add productivity coach integration
 - [ ] Create community challenges and support
 
 ## Testing and Quality
@@ -104,4 +104,4 @@
 ---
 
 ## Current Session Focus
-Starting with **Habit Tracking System** as it's a core ADHD management feature that users need daily.
+Starting with **Habit Tracking System** as it's a core feature that users need daily.

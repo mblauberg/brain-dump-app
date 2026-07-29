@@ -331,8 +331,8 @@ const TaskModal: React.FC<TaskModalProps> = ({
             </fieldset>
 
             {/* Focus-friendly tips */}
-            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4" role="complementary" aria-labelledby="adhd-tips-heading">
-              <h4 id="adhd-tips-heading" className="text-sm font-medium text-blue-800 mb-2">
+            <div className="bg-blue-50 border border-blue-200 rounded-lg p-4" role="complementary" aria-labelledby="task-tips-heading">
+              <h4 id="task-tips-heading" className="text-sm font-medium text-blue-800 mb-2">
                 <span aria-hidden="true">💡</span> Energy-Adaptive Task Tips
               </h4>
               <ul className="text-xs text-blue-700 space-y-1">

@@ -1,7 +1,7 @@
 {
   "short_name": "Brain Organiser",
-  "name": "ADHD Brain Organiser - AI-Powered Productivity App",
-  "description": "An ADHD-friendly productivity app with brain dump processing, task management, habit tracking, and sleep scheduling",
+  "name": "Brain Dump Organiser - AI-Powered Productivity App",
+  "description": "A productivity app that turns freeform notes into structured tasks, habits and a sleep schedule",
   "icons": [
     {
       "src": "favicon.ico",

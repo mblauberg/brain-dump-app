@@ -1,5 +1,5 @@
 // Glass Component Library
-// Modern glass morphism components with ADHD-optimized design
+// Modern glass morphism components with low-cognitive-load design
 
 export { default as GlassContainer } from './GlassContainer';
 export type { GlassContainerProps } from './GlassContainer';

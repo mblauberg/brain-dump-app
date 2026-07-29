@@ -67,7 +67,7 @@ const GlassInput: React.FC<GlassInputProps> = ({
       icon: 'w-4 h-4',
     },
     md: {
-      input: 'px-4 py-3 text-sm min-h-[2.75rem]', // 44px - ADHD friendly
+      input: 'px-4 py-3 text-sm min-h-[2.75rem]', // 44px - accessible touch target
       label: 'text-sm',
       icon: 'w-5 h-5',
     },

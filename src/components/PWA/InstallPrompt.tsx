@@ -125,7 +125,7 @@ const InstallPrompt: React.FC = () => {
         </div>
       </div>
       
-      {/* ADHD-friendly benefits */}
+      {/* Key benefits */}
       <div className="mt-3 pt-3 border-t border-gray-100">
         <div className="flex items-center space-x-4 text-xs text-gray-500">
           <div className="flex items-center">
