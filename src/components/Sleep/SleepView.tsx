@@ -207,7 +207,7 @@ const SleepView: React.FC = () => {
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">No sleep logs yet</h3>
           <p className="text-gray-500 mb-4">
-            Start tracking your sleep schedule to improve your wellbeing and overall well-being.
+            Start tracking your sleep schedule to improve your sleep consistency and overall well-being.
           </p>
           <button
             onClick={handleCreateSleep}
@@ -248,7 +248,7 @@ const SleepView: React.FC = () => {
             <h4 className="font-medium mb-2">Why Sleep Matters:</h4>
             <ul className="space-y-1">
               <li>• Improves focus and attention</li>
-              <li>• Reduces hyperactivity and impulsivity</li>
+              <li>• Steadies energy and reduces restlessness</li>
               <li>• Enhances emotional regulation</li>
               <li>• Supports memory consolidation</li>
             </ul>
@@ -259,7 +259,7 @@ const SleepView: React.FC = () => {
               <li>• Difficulty winding down at night</li>
               <li>• Racing thoughts before bed</li>
               <li>• Irregular sleep-wake cycles</li>
-              <li>• Medication effects on sleep</li>
+              <li>• Caffeine and evening stimulants</li>
             </ul>
           </div>
         </div>

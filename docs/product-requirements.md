@@ -7,20 +7,20 @@
 **Target Launch:** Q2 2025
 **Platform:** Web application (React), with mobile apps to follow
 
-The Brain Dump Organiser is an AI-powered productivity application that transforms chaotic thoughts and mental "brain dumps" into organised, actionable schedules through intelligent AI processing. It helps users overcome executive function challenges by automating the cognitive load of organisation and planning.
+The Brain Dump Organiser is an AI-powered productivity application that transforms chaotic thoughts and mental "brain dumps" into organised, actionable schedules through intelligent AI processing. It helps users overcome planning friction by automating the cognitive load of organisation and scheduling.
 
 ## Problem Statement
 
 ### Primary Problems
 - **Mental Overload**: Users often hold too many thoughts simultaneously, leading to overwhelm and forgotten tasks
 - **Task Prioritisation Difficulty**: Struggle to determine what's urgent vs. important
-- **Executive Function Challenges**: Difficulty organising, planning, and time management
+- **Planning and Organisation Challenges**: Difficulty organising, planning, and time management
 - **Inconsistent Routines**: Trouble maintaining habits and sleep schedules
 - **Context Switching**: Hard to see the big picture and how tasks relate to overall goals
 
 ### Current Solutions Limitations
 - Generic productivity apps don't account for individual cognitive styles
-- Manual organisation requires executive function skills that vary by person
+- Manual organisation requires planning effort that varies by person
 - Rigid systems that don't adapt to different thinking patterns
 - Lack of integration between tasks, habits, and life management
 

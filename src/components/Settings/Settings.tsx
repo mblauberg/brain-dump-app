@@ -214,10 +214,10 @@ const Settings: React.FC = () => {
           <h3 className="font-medium text-blue-800 mb-2">Coming Soon</h3>
           <ul className="text-sm text-blue-700 space-y-1">
             <li>• Gentle reminder styles to reduce overwhelm</li>
-            <li>• Time blindness compensation with buffer time</li>
-            <li>• Hyperfocus session management</li>
-            <li>• Executive function assistance modes</li>
-            <li>• Dopamine-friendly reward systems</li>
+            <li>• Automatic buffer time between commitments</li>
+            <li>• Deep focus session management</li>
+            <li>• Assisted planning modes</li>
+            <li>• Progress and achievement rewards</li>
           </ul>
         </div>
       </div>
