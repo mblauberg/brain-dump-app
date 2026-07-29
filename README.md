@@ -1,13 +1,13 @@
 # Brain Dump
 
-A productivity app built for ADHD brains. Dump your thoughts in plain text, and let AI sort them into tasks, habits, and schedules.
+Dump your thoughts in plain text and let an LLM sort them into tasks, habits and schedules.
 
 **Version:** 0.1.0
 **Status:** Active development
 
 ## What it does
 
-Ever have 47 tabs open and 23 half-finished thoughts bouncing around your head? That's what this is for.
+Most planning tools want structured input: a title, a due date, a priority, a project. Thoughts do not arrive that way. This closes that gap.
 
 Type out whatever's in your brain - messy, unstructured, stream of consciousness. The app uses AI (OpenAI, Claude, or Gemini) to parse your chaos and organize it into:
 - Actionable tasks with priorities and time estimates
@@ -29,7 +29,7 @@ Then it gives you tools to actually follow through: task boards, habit streaks, 
 ```bash
 # Clone the repo
 git clone https://github.com/mblauberg/brain-dump-app.git
-cd brain-dump-app/adhd-brain-organiser
+cd brain-dump-app
 
 # Install dependencies (uses legacy flag for React 19 peer deps)
 npm install --legacy-peer-deps
@@ -182,11 +182,11 @@ This is a personal project, but if you want to submit a PR for bug fixes or feat
 
 ## Why this exists
 
-Executive dysfunction is real. Most productivity apps assume you can plan, prioritize, and organize your thoughts. If your brain works that way, great - you don't need this app.
+Most productivity apps assume the organising is already done — that you arrive knowing what the task is, when it is due and how it ranks. The work of turning a tangle of half-formed thoughts into that structure is the part they leave to you, and it is the part that stops people using them.
 
-This is for people whose thoughts come out like this: "wait did I reply to that email also I need to do laundry but first I should probably eat something oh and I forgot to call mom yesterday dammit also why is it already 5pm"
+So the input here is deliberately unstructured: one text box, no fields, no required format. Type it the way you thought it. The model does the parsing, and you keep the output.
 
-The AI handles the organizing part. You just handle the brain dump part.
+The interface also adapts to declared energy level, hiding detail and reducing options when you have flagged that you are running low. Structure should not become another thing to maintain.
 
 ## License
 
@@ -194,4 +194,4 @@ MIT. Use it however you want.
 
 ---
 
-Built for the ADHD community by someone who gets it.
+MIT licensed. Built as a personal project.
