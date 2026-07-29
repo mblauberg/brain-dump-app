@@ -207,7 +207,7 @@ const SleepView: React.FC = () => {
           </div>
           <h3 className="text-lg font-medium text-gray-900 mb-2">No sleep logs yet</h3>
           <p className="text-gray-500 mb-4">
-            Start tracking your sleep schedule to improve your ADHD management and overall well-being.
+            Start tracking your sleep schedule to improve your wellbeing and overall well-being.
           </p>
           <button
             onClick={handleCreateSleep}
@@ -237,11 +237,11 @@ const SleepView: React.FC = () => {
         </div>
       )}
 
-      {/* ADHD Sleep Tips */}
+      {/* Quality Sleep Tips */}
       <div className="bg-blue-50 border border-blue-200 rounded-lg p-6">
         <div className="flex items-center mb-4">
           <MoonIcon className="h-6 w-6 text-blue-600 mr-3" />
-          <h3 className="text-lg font-semibold text-blue-800">Sleep & ADHD</h3>
+          <h3 className="text-lg font-semibold text-blue-800">Sleep Quality</h3>
         </div>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm text-blue-700">
           <div>
@@ -254,7 +254,7 @@ const SleepView: React.FC = () => {
             </ul>
           </div>
           <div>
-            <h4 className="font-medium mb-2">ADHD Sleep Challenges:</h4>
+            <h4 className="font-medium mb-2">Sleep Challenges:</h4>
             <ul className="space-y-1">
               <li>• Difficulty winding down at night</li>
               <li>• Racing thoughts before bed</li>
@@ -273,7 +273,7 @@ const SleepView: React.FC = () => {
             <div>
               <h3 className="font-medium text-green-800">Excellent sleep quality!</h3>
               <p className="text-sm text-green-700">
-                Your average sleep quality of {sleepStats.avgQuality} is helping optimize your ADHD management.
+                Your average sleep quality of {sleepStats.avgQuality} is helping optimize your wellbeing.
               </p>
             </div>
           </div>

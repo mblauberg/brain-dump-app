@@ -317,9 +317,9 @@ const HabitScheduler: React.FC<HabitSchedulerProps> = ({ isOpen, onClose, habit 
               </div>
             )}
 
-            {/* ADHD Tips */}
+            {/* Energy-Aware Tips */}
             <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 mb-6">
-              <h4 className="font-medium text-blue-800 mb-2">💡 ADHD Habit Scheduling Tips</h4>
+              <h4 className="font-medium text-blue-800 mb-2">💡 Habit Scheduling Tips</h4>
               <ul className="text-sm text-blue-700 space-y-1">
                 <li>• Schedule habits during your natural energy peaks for better consistency</li>
                 <li>• Start with daily habits - they're easier to remember than weekly ones</li>

@@ -1,7 +1,7 @@
 import Anthropic from '@anthropic-ai/sdk';
 import { AIProvider, AIResponse, AIOptions, ModelInfo, AIProviderError } from '../types';
 import { 
-  ADHD_BRAIN_DUMP_SYSTEM_PROMPT, 
+  BRAIN_DUMP_SYSTEM_PROMPT, 
   createUserPrompt, 
   providerSpecificPrompts,
   validateAIResponse,
@@ -64,7 +64,7 @@ export class ClaudeProvider implements AIProvider {
 
     try {
       const processedText = preprocessBrainDump(text);
-      const systemPrompt = `${ADHD_BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.claude.additionalInstructions}`;
+      const systemPrompt = `${BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.claude.additionalInstructions}`;
       
       const message = await anthropic.messages.create({
         model: model,

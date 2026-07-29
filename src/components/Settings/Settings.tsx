@@ -203,11 +203,11 @@ const Settings: React.FC = () => {
         <AISettings />
       </div>
 
-      {/* ADHD-Specific Settings */}
+      {/* Productivity Features */}
       <div className="card">
         <div className="flex items-center mb-4">
           <CogIcon className="h-5 w-5 text-gray-600 mr-2" />
-          <h2 className="text-lg font-semibold text-gray-900">ADHD-Friendly Features</h2>
+          <h2 className="text-lg font-semibold text-gray-900">Accessibility & Focus Features</h2>
         </div>
         
         <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">

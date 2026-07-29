@@ -76,7 +76,7 @@ const FloatingHeader: React.FC<FloatingHeaderProps> = ({
               <CpuChipIcon className="h-6 w-6 text-primary-600" aria-hidden="true" />
               <div className="hidden sm:block">
                 <h1 className="text-base font-bold text-gray-900">Brain Organiser</h1>
-                <p className="text-xs text-gray-500">ADHD-Optimized</p>
+                <p className="text-xs text-gray-500">Energy-Optimized</p>
               </div>
             </div>
           </div>

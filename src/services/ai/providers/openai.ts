@@ -1,7 +1,7 @@
 import OpenAI from 'openai';
 import { AIProvider, AIResponse, AIOptions, ModelInfo, AIProviderError } from '../types';
 import { 
-  ADHD_BRAIN_DUMP_SYSTEM_PROMPT, 
+  BRAIN_DUMP_SYSTEM_PROMPT, 
   createUserPrompt, 
   providerSpecificPrompts,
   validateAIResponse,
@@ -70,7 +70,7 @@ export class OpenAIProvider implements AIProvider {
 
     try {
       const processedText = preprocessBrainDump(text);
-      const systemPrompt = `${ADHD_BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.openai.additionalInstructions}`;
+      const systemPrompt = `${BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.openai.additionalInstructions}`;
       
       const completion = await openai.chat.completions.create({
         model: model,

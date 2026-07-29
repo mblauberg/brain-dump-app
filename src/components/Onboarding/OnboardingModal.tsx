@@ -22,18 +22,18 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose }) =>
 
   const steps = [
     {
-      title: "Welcome to Your ADHD Brain Organiser! 🧠",
+      title: "Welcome to Your Brain Dump Organiser! 🧠",
       content: (
         <div className="text-center space-y-4">
           <div className="mx-auto w-24 h-24 bg-primary-100 rounded-full flex items-center justify-center mb-6">
             <CpuChipIcon className="w-12 h-12 text-primary-600" />
           </div>
           <p className="text-gray-600">
-            This app is specifically designed for ADHD minds - to help transform overwhelming thoughts 
+            This app is designed to transform chaotic thoughts - to help transform overwhelming thoughts 
             into organized, actionable tasks.
           </p>
           <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-            <h4 className="font-medium text-blue-800 mb-2">🎯 Built for ADHD Success</h4>
+            <h4 className="font-medium text-blue-800 mb-2">🎯 Built for Productivity Success</h4>
             <ul className="text-sm text-blue-700 space-y-1 text-left">
               <li>• Reduces cognitive overload with clear visual organization</li>
               <li>• Breaks down complex projects into manageable steps</li>
@@ -107,7 +107,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose }) =>
             </div>
           </div>
           <div className="bg-purple-50 border border-purple-200 rounded-lg p-4">
-            <h4 className="font-medium text-purple-800 mb-2">🎨 ADHD-Friendly Features:</h4>
+            <h4 className="font-medium text-purple-800 mb-2">🎨 Features for Clarity and Focus:</h4>
             <ul className="text-sm text-purple-700 space-y-1">
               <li>• Color-coded priorities reduce decision fatigue</li>
               <li>• Energy level matching helps you work with your natural rhythms</li>
@@ -125,7 +125,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose }) =>
             <BoltIcon className="w-10 h-10 text-purple-600" />
           </div>
           <p className="text-gray-600">
-            Build positive habits and maintain healthy sleep patterns - both crucial for ADHD management.
+            Build positive habits and maintain healthy sleep patterns - both crucial for overall wellbeing.
           </p>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
             <div className="bg-orange-50 border border-orange-200 rounded-lg p-4">
@@ -156,7 +156,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose }) =>
             </div>
           </div>
           <div className="bg-green-50 border border-green-200 rounded-lg p-4">
-            <h4 className="font-medium text-green-800 mb-2">🧠 Why This Matters for ADHD:</h4>
+            <h4 className="font-medium text-green-800 mb-2">🧠 Why This Matters:</h4>
             <ul className="text-sm text-green-700 space-y-1">
               <li>• Consistent habits reduce daily decision-making</li>
               <li>• Good sleep improves focus and emotional regulation</li>
@@ -175,7 +175,7 @@ const OnboardingModal: React.FC<OnboardingModalProps> = ({ isOpen, onClose }) =>
           </div>
           <p className="text-gray-600">
             Schedule tasks for specific dates and see your habits progress on the calendar. 
-            Perfect for time-blind ADHD brains!
+            Perfect for managing time and priorities!
           </p>
           <div className="bg-gray-50 border border-gray-200 rounded-lg p-4">
             <div className="grid grid-cols-7 gap-1 mb-4">

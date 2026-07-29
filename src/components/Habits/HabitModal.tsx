@@ -273,9 +273,9 @@ const HabitModal: React.FC<HabitModalProps> = ({ isOpen, onClose, editingHabit }
                     </div>
                   )}
 
-                  {/* ADHD Tips */}
+                  {/* Energy-Aware Tips */}
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                    <h3 className="font-medium text-blue-800 mb-2">💡 ADHD-Friendly Habit Tips</h3>
+                    <h3 className="font-medium text-blue-800 mb-2">💡 Habit Formation Tips</h3>
                     <ul className="text-sm text-blue-700 space-y-1">
                       <li>• Start with tiny habits (2-5 minutes) to build momentum</li>
                       <li>• Link new habits to existing routines (habit stacking)</li>

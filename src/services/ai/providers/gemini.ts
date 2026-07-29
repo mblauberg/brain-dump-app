@@ -1,7 +1,7 @@
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { AIProvider, AIResponse, AIOptions, ModelInfo, AIProviderError } from '../types';
 import { 
-  ADHD_BRAIN_DUMP_SYSTEM_PROMPT, 
+  BRAIN_DUMP_SYSTEM_PROMPT, 
   createUserPrompt, 
   providerSpecificPrompts,
   validateAIResponse,
@@ -75,7 +75,7 @@ export class GeminiProvider implements AIProvider {
 
     try {
       const processedText = preprocessBrainDump(text);
-      const fullPrompt = `${ADHD_BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.gemini.additionalInstructions}\n\n${createUserPrompt(processedText, {
+      const fullPrompt = `${BRAIN_DUMP_SYSTEM_PROMPT}\n\n${providerSpecificPrompts.gemini.additionalInstructions}\n\n${createUserPrompt(processedText, {
         tasks: true,
         habits: true,
         events: true,

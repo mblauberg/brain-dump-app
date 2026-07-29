@@ -237,7 +237,7 @@ const BulkTaskActions: React.FC<BulkTaskActionsProps> = ({
           </div>
         )}
 
-        {/* ADHD Tip */}
+        {/* Energy Tip */}
         <div className="mt-3 pt-3 border-t border-gray-100">
           <div className="text-xs text-blue-600 bg-blue-50 px-2 py-1 rounded">
             💡 Use bulk actions to quickly organize multiple tasks without getting overwhelmed

@@ -52,7 +52,7 @@ const TaskTemplates: React.FC<TaskTemplatesProps> = ({ isOpen, onClose }) => {
       tasks: [
         { title: 'Make bed', description: 'Quick 2-minute task to start the day with an accomplishment', priority: 'low', timeEstimate: '15min', energyLevel: 'low', order: 1 },
         { title: 'Drink a glass of water', description: 'Rehydrate after sleep', priority: 'medium', timeEstimate: '15min', energyLevel: 'low', order: 2 },
-        { title: 'Take medication (if applicable)', description: 'Don\'t forget ADHD meds or other prescriptions', priority: 'high', timeEstimate: '15min', energyLevel: 'low', order: 3 },
+        { title: 'Take medications (if applicable)', description: 'Remember to take your medications', priority: 'high', timeEstimate: '15min', energyLevel: 'low', order: 3 },
         { title: 'Review today\'s priorities', description: 'Check calendar and task list for the day', priority: 'high', timeEstimate: '15min', energyLevel: 'medium', order: 4 },
         { title: 'Do 5-minute morning exercise', description: 'Light stretches or jumping jacks to wake up', priority: 'medium', timeEstimate: '15min', energyLevel: 'medium', order: 5 },
       ]
@@ -97,7 +97,7 @@ const TaskTemplates: React.FC<TaskTemplatesProps> = ({ isOpen, onClose }) => {
       icon: ShoppingCartIcon,
       color: 'from-purple-400 to-pink-400',
       tasks: [
-        { title: 'Plan 3-4 meals for the week', description: 'Choose simple, ADHD-friendly recipes', priority: 'high', timeEstimate: '30min', energyLevel: 'medium', order: 1 },
+        { title: 'Plan 3-4 meals for the week', description: 'Choose simple, quick-prep recipes', priority: 'high', timeEstimate: '30min', energyLevel: 'medium', order: 1 },
         { title: 'Make grocery list', description: 'Check pantry and organize by store layout', priority: 'high', timeEstimate: '15min', energyLevel: 'low', order: 2 },
         { title: 'Go grocery shopping', description: 'Stick to the list to avoid overwhelm', priority: 'high', timeEstimate: '1hr', energyLevel: 'medium', order: 3 },
         { title: 'Wash and prep vegetables', description: 'Cut vegetables for easy cooking', priority: 'medium', timeEstimate: '30min', energyLevel: 'medium', order: 4 },
@@ -108,7 +108,7 @@ const TaskTemplates: React.FC<TaskTemplatesProps> = ({ isOpen, onClose }) => {
     {
       id: 'study-session',
       name: 'Effective Study Session',
-      description: 'ADHD-friendly study techniques and breaks',
+      description: 'Effective study techniques and breaks',
       category: 'personal',
       icon: AcademicCapIcon,
       color: 'from-yellow-400 to-orange-400',
@@ -227,7 +227,7 @@ const TaskTemplates: React.FC<TaskTemplatesProps> = ({ isOpen, onClose }) => {
             /* Template Selection */
             <div className="p-6">
               <p className="text-gray-600 mb-6">
-                Choose from these ADHD-friendly task templates to quickly set up common activities. 
+                Choose from these helpful task templates to quickly set up common activities. 
                 Each template breaks complex tasks into manageable steps.
               </p>
 
@@ -253,7 +253,7 @@ const TaskTemplates: React.FC<TaskTemplatesProps> = ({ isOpen, onClose }) => {
                 })}
               </div>
 
-              {/* ADHD Tips */}
+              {/* Energy-Aware Tips */}
               <div className="mt-8 bg-blue-50 border border-blue-200 rounded-lg p-4">
                 <h4 className="font-medium text-blue-800 mb-2">💡 Using Task Templates</h4>
                 <ul className="text-sm text-blue-700 space-y-1">
